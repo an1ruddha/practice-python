@@ -1,0 +1,54 @@
+from typing import List
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        if len(nums) == 1:
+            return 1
+        nums.sort()
+        max_consecutive = 1
+        counter = 1
+        for i in range(1, len(nums)):
+            if nums[i] - nums[i-1] == 1:
+                counter += 1
+                if counter > max_consecutive:
+                    max_consecutive = counter
+            elif nums[i] - nums[i-1] == 0:
+                continue
+            else:
+                counter = 1            
+        return max_consecutive
+
+def main():
+    obj = Solution()
+    list_test = [[100,4,200,1,3,2],
+                 [0,3,7,2,5,8,4,6,0,1]
+                ]
+    
+    for test in list_test:
+        print(obj.longestConsecutive(test), " = ", test)
+if __name__ == "__main__":
+    main()
+    
+# Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+
+# You must write an algorithm that runs in O(n) time.
+
+ 
+
+# Example 1:
+
+# Input: nums = [100,4,200,1,3,2]
+# Output: 4
+# Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
+# Example 2:
+
+# Input: nums = [0,3,7,2,5,8,4,6,0,1]
+# Output: 9
+ 
+
+# Constraints:
+
+# 0 <= nums.length <= 105
+# -109 <= nums[i] <= 109
